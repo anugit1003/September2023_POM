@@ -16,6 +16,7 @@ import com.automation.tests.utilities.Constants;
 
 public class LoginTest extends BaseTest {
 	static Logger logger = LogManager.getLogger(LoginTest.class.getName());
+	
 
 	@BeforeClass
 	public void setUp() {
