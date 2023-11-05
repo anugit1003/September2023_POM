@@ -33,6 +33,10 @@ public class LoginPage extends BasePage {
 	
 	@FindBy(id = "forgot_password_link")
 	private WebElement forgotPassword;
+	
+	@FindBy(id = "idcard-identity")
+	private WebElement rememberUserName;
+	
 
 	public void enterUserName(String userName) {
 		enterText(userId, userName, "user name");
@@ -66,7 +70,7 @@ public class LoginPage extends BasePage {
 	}
 	
 	public String getUserNameText() {
-		return getTextFromElement(userId, "username");
+		return getTextFromElement(rememberUserName, "username");
 	}
 	
 	public  ForgotPasswordPage clickForgotPassword() {

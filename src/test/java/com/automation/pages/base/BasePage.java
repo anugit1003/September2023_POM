@@ -30,6 +30,12 @@ public class BasePage {
 		logger.info(data + " - extracted the text from " + objectName);
 		return data;
 	}
+	
+	public String getTextFromElementAttribute(WebElement ele, String attribute, String objectName) {
+		String data = ele.getAttribute(attribute);
+		logger.info(data + " - extracted the text from " + objectName);
+		return data;
+	}
 
 	public void enterText(WebElement ele, String data, String objectName) {
 		if (ele.isDisplayed()) {

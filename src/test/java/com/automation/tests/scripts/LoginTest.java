@@ -4,7 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.automation.pages.home.HomePage;
@@ -18,15 +20,17 @@ public class LoginTest extends BaseTest {
 	static Logger logger = LogManager.getLogger(LoginTest.class.getName());
 	
 
-	@BeforeClass
+	@BeforeMethod
 	public void setUp() {
 		initializeProperties();
 		launchBrowser(getProps().getProperty(Constants.BROWSER));
 		goToUrl(getProps().getProperty(Constants.SALESFORCE_URL));
 		maximizeBrowser();
 	}
+	
+	
 
-	@AfterClass
+	@AfterMethod
 	public void closeBrowser() throws Exception {
 		quitBrowser();
 	}
@@ -44,32 +48,35 @@ public class LoginTest extends BaseTest {
 		logger.info("Login successful");
 	}
 	@Test
-	public void testInvalidLogin() throws InterruptedException {
+	public void testInvalidLogin() throws Throwable {
 		LoginPage loginPage = new LoginPage(getDriver());
 		loginPage.enterUserName(getProps().getProperty(Constants.SF_USER_NAME));
 		loginPage.enterPassword("");
 		loginPage.clickLogin("login");
-		String errorMessage = loginPage.getErrorMessageLabelText();
-		Assert.assertEquals(errorMessage,"Please enter your password");
+		Thread.sleep(3000);
+		String errorMessage = loginPage.getErrorMessageLabelText1();
+		Assert.assertEquals(errorMessage,"Please enter your password.");
 		Thread.sleep(3000);
 		
 	}
 	@Test
-	public void testInvalidLogin1() throws InterruptedException {
+	public void testInvalidLogin1() throws Exception {
 		LoginPage loginPage = new LoginPage(getDriver());
 		loginPage.enterUserName("123");
 		loginPage.enterPassword("22131");
 		loginPage.clickLogin("login");
+		Thread.sleep(3000);
 		String errorMessage1 = loginPage.getErrorMessageLabelText1();
 		Assert.assertEquals(errorMessage1,"Please check your username and password. If you still can't log in, contact your Salesforce administrator.");
 		Thread.sleep(3000);
 	}
 	@Test
-	public void testRememberMe() {
+	public void testRememberMe() throws Exception {
 		LoginPage loginPage = new LoginPage(getDriver());
 		loginPage.enterUserName(getProps().getProperty(Constants.SF_USER_NAME));
 		loginPage.enterPassword(getProps().getProperty(Constants.SF_PASSWORD));
 		loginPage.clickRememberMe();
+		Thread.sleep(3000);
 		HomePage homePage = loginPage.clickLogin("login");
 		String actualUserNameLabel = homePage.getUserNameLabelText();
 		Assert.assertEquals(actualUserNameLabel, "Anuradha Jackson");
@@ -77,6 +84,7 @@ public class LoginTest extends BaseTest {
 		//click logout - return a Login Page
 		homePage.clickUserNameLabel();
 		loginPage = homePage.clickLogoutLink();
+		Thread.sleep(3000);
 		String userIdText = loginPage.getUserNameText();
 		Assert.assertEquals(userIdText, "agorpalli@agorpalli.com");
 		boolean isSelected = loginPage.isRememberMeSelected();
@@ -101,9 +109,7 @@ public class LoginTest extends BaseTest {
 		Assert.assertEquals(emailText, "Check Your Email");
 		logger.info("Check Your Email Text is validated");
 		emailPage.returnToLogin();
-		
-		
-		
+
 	}
 	
 	

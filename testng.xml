@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Application Suite">
-  <test name="Application Test">
+<suite name="POM Application Suite">
+<listeners>
+<listener class-name="com.automation.tests.utilities.TestEventListener"></listener>
+</listeners>
+  <test name="POM Application Test">
     <classes>
-      <class name="com.tests.testNg.FilePhotoUploadTest"/>
-      <class name="com.tests.testNg.MySettingsTest"/>
+      <class name="com.automation.tests.scripts.LoginTest"/>
+
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

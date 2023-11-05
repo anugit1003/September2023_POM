@@ -10,4 +10,5 @@ public class Constants {
 	public static final String SF_FIRST_NAME = "salesforce.firstName";
 	public static final String SF_LAST_NAME = "salesforce.lastName";
 	public static final String SF_U_LAST_NAME = "salesforce.ulastName";
+	public static final String EXTENT_REPORT_PATH = CUR_DIR + "/extentReports/pomextentreport.html";
 }
